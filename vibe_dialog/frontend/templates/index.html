@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Dialog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vibe Dialog</h1>
+            <nav>
+                <button id="profile-btn">Profile</button>
+                <button id="save-btn">Save Context</button>
+                <button id="clear-btn">New Context</button>
+            </nav>
+        </header>
+
+        <div class="main-content">
+            <div class="dialog-panel">
+                <div class="message-container" id="message-container">
+                    {% if context and context.messages %}
+                        {% for message in context.messages %}
+                            <div class="message message-{{ message.role.name|lower }}">
+                                <div class="message-content">{{ message.content }}</div>
+                                <div class="message-timestamp">{{ message.timestamp.strftime('%H:%M') }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <div class="input-area">
+                    <textarea id="message-input" placeholder="Type your message..."></textarea>
+                    <button id="send-btn">Send</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="documents-panel">
+                    <h2>Documents</h2>
+                    <button id="new-doc-btn">New Document</button>
+                    <ul id="document-list">
+                        {% if context and context.documents %}
+                            {% for doc_id, doc in context.documents.items() %}
+                                <li data-id="{{ doc_id }}">{{ doc.title }}</li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="actions-panel">
+                    <h2>Actions</h2>
+                    <button id="undo-btn">Undo</button>
+                    <button id="redo-btn">Redo</button>
+                    <button id="summarize-btn">Summarize</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Modal -->
+    <div id="document-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Document</h2>
+            <form id="document-form" enctype="multipart/form-data">
+                <input type="hidden" id="document-id">
+                <div class="form-group">
+                    <label for="document-title">Title</label>
+                    <input type="text" id="document-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="document-content">Content</label>
+                    <textarea id="document-content" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="document-file">Attach File (optional)</label>
+                    <input type="file" id="document-file">
+                    <div id="file-info" class="file-info" style="display:none;">
+                        <span id="file-name"></span>
+                        <button type="button" id="download-file">Download</button>
+                        <button type="button" id="delete-file">Remove</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>User Profile</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label for="profile-name">Name</label>
+                    <input type="text" id="profile-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-email">Email</label>
+                    <input type="email" id="profile-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="profile-role">Professional Role</label>
+                    <input type="text" id="profile-role">
+                </div>
+                <div class="form-group">
+                    <label for="profile-employer">Employer</label>
+                    <input type="text" id="profile-employer">
+                </div>
+                <div class="form-group">
+                    <label for="profile-jurisdiction">Preferred Jurisdiction</label>
+                    <input type="text" id="profile-jurisdiction">
+                </div>
+                <div class="form-group">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

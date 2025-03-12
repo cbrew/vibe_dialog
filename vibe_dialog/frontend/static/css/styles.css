@@ -1,0 +1,286 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+nav button {
+    margin-left: 10px;
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    min-height: 80vh;
+}
+
+.dialog-panel {
+    flex: 3;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Message display */
+.message-container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.message-user {
+    background-color: #e1f5fe;
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.message-assistant {
+    background-color: #f0f4c3;
+}
+
+.message-system {
+    background-color: #e8eaf6;
+    font-style: italic;
+    max-width: 100%;
+    border-left: 3px solid #3f51b5;
+}
+
+.message-content {
+    margin-bottom: 5px;
+}
+
+.message-timestamp {
+    font-size: 0.7rem;
+    color: #888;
+    text-align: right;
+}
+
+/* Input area */
+.input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.input-area textarea {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    height: 60px;
+}
+
+.input-area button {
+    margin-left: 10px;
+    align-self: flex-end;
+}
+
+/* Sidebar panels */
+.documents-panel, .actions-panel {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.documents-panel h2, .actions-panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+#document-list {
+    list-style: none;
+    margin-top: 10px;
+}
+
+#document-list li {
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+#document-list li:hover {
+    background-color: #e1f5fe;
+}
+
+#document-list li.has-file {
+    position: relative;
+}
+
+#document-list li.has-file::after {
+    content: "📎";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Buttons */
+button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+button:hover {
+    background-color: #0b7dda;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 60%;
+    max-width: 700px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* File upload styling */
+.file-info {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.file-info span {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.file-info button {
+    margin-left: 8px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+}
+
+.file-info button#download-file {
+    background-color: #4caf50;
+}
+
+.file-info button#delete-file {
+    background-color: #f44336;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+    
+    .dialog-panel {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .modal-content {
+        width: 90%;
+    }
+}
