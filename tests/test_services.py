@@ -165,5 +165,5 @@ def test_add_citation():
 
     updated = service.add_citation(document, "Test citation")
     assert len(updated.citations) == 1
-    assert updated.citations[0] == "Test citation"
+    assert updated.citations[0].text == "Test citation"  # Check the text attribute
     assert updated.updated_at > original_updated_at

@@ -1,125 +1,128 @@
-# vibe_dialog
+# Vibe Dialog
 
-A text-based dialogue system designed to enhance the efficiency and reliability of legal professionals.
+A sophisticated text-based dialog system for legal professionals with robust document management, semantic search, annotations, and citations.
 
 ## Features
 
-### Context Management
-- Maintains a dialogue context between the user and the system
-- Stores and manages various document types within the context
-- Automatically adds created or uploaded documents to the context
-- Allows manual context editing
-- Prompts users to save context at the end of a session
-- Discards unsaved context on session timeout
-
-### User Interface
-- Text window for dialogue transcript
-- Command-based input (anything the system can do can be typed as a command)
-- Contextual shortcut buttons
-- Guided workflows for complex tasks
-- Command pattern implementation with systematic undo/redo functionality
-
-### Document Management
-- Document creation, viewing, and editing
-- Support for citations between documents
-- Document commenting
-- Document grouping capabilities
-- Document metadata management
-
-### Legal Assistance
-- Upload, create, and modify legal documents
-- Search and access document collections
-- Generate summaries and overviews
-- Collaborative document creation
-
-### User Profiles
-- Personalized user profiles
-- UI preference settings
-- Professional role and employer information
-- Jurisdiction preferences
-- Editable profile settings
-
-### State Management
-- Workflow stack for interaction state tracking
-- User goal representation
-- Shared context visibility
-- Common ground representation
-
-## Implementation
-
-### Technology Stack
-- **Backend**: Python with Flask
-- **Frontend**: HTML5, CSS, and JavaScript
-- **Package Management**: Poetry
-- **Testing**: pytest
-
-### Project Structure
-```
-vibe_dialog/
-├── backend/
-│   ├── models.py          # Data models
-│   ├── services.py        # Business logic
-│   └── commands.py        # Command pattern implementation
-├── frontend/
-│   ├── templates/         # HTML templates
-│   ├── static/            # CSS, JS, and static assets
-│   └── app.py             # Flask application
-└── __main__.py            # Application entry point
-```
+- **Rich Document Management**: Upload, organize, and annotate documents
+- **Semantic Search**: Find information across documents using keywords or concepts
+- **Annotations & Citations**: Add notes, highlights, and proper citations to documents
+- **Conversation History**: Keep track of conversations with references to documents
+- **Command Pattern**: Robust state management with undo/redo capabilities
 
 ## Getting Started
 
+### Prerequisites
+
+- Python 3.9 or higher
+- Poetry (for dependency management)
+
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
    ```
    git clone https://github.com/yourusername/vibe_dialog.git
    cd vibe_dialog
    ```
 
-2. Install dependencies with Poetry:
+2. Install dependencies with Poetry
    ```
    poetry install
    ```
 
-### Running the Application
+3. Run the application
+   ```
+   poetry run python -m vibe_dialog
+   ```
 
-Start the application:
+4. Access the web interface at `http://localhost:5000`
+
+## Project Structure
+
 ```
-poetry run python -m vibe_dialog
+vibe_dialog/
+├── backend/           # Backend services and models
+│   ├── models.py      # Data models using dataclasses
+│   ├── services.py    # Service layer business logic
+│   ├── commands.py    # Command pattern implementation
+│   └── utils.py       # Utility functions
+├── frontend/          # Flask web interface
+│   ├── templates/     # Jinja2 HTML templates
+│   ├── static/        # Static assets (CSS, JS)
+│   └── app.py         # Flask application routes
+├── __init__.py        # Package initialization
+└── __main__.py        # Application entry point
+tests/                 # Test suite
+├── test_models.py     # Tests for models
+├── test_services.py   # Tests for services
+└── test_commands.py   # Tests for commands
+docs/                  # Documentation
+└── design.md          # System design document
 ```
 
-The application will be available at `http://localhost:5000`.
+## Key Concepts
 
-### Testing
+### Command Pattern
 
-Run the test suite:
+The system uses the Command pattern for state management, providing:
+
+- **Atomicity**: Operations succeed or fail as a unit
+- **Reversibility**: Full undo/redo capabilities
+- **History**: Tracking of all operations
+- **Extensibility**: Easy addition of new commands
+
+### Document Model
+
+Documents are the core entities in the system:
+
+- **Content**: The document text
+- **Metadata**: Additional information
+- **Annotations**: User-added notes and highlights
+- **Citations**: References to sources
+- **Attachments**: Supporting files
+
+### Search Capabilities
+
+The system supports multiple search approaches:
+
+- **Local**: Basic keyword matching
+- **Semantic**: Concept-based search
+- **Hybrid**: Combination of approaches for best results
+
+## Development
+
+### Running Tests
+
 ```
 poetry run pytest
 ```
 
-## Development
+### Code Quality
 
-### Key Components
+```
+# Format code
+poetry run black vibe_dialog && poetry run isort vibe_dialog
 
-- **DialogueContext**: Maintains the state of a dialogue session, including messages and documents
-- **DocumentService**: Handles document creation, updating, and metadata management
-- **CommandHistory**: Implements undo/redo functionality through the Command pattern
-- **Flask UI**: Provides a web-based interface for interacting with the system
+# Type checking
+poetry run mypy vibe_dialog
 
-### Command Pattern
+# Linting
+poetry run flake8 vibe_dialog
+```
 
-The application uses the Command pattern to enable systematic undo/redo functionality:
+## Design Document
 
-- **Command**: Abstract base class for all commands
-- **AddDocumentCommand**: Adds a document to the dialogue context
-- **CreateDocumentCommand**: Creates and adds a new document
-- **UpdateDocumentCommand**: Updates an existing document
+For a detailed overview of the system design, see [design.md](docs/design.md).
 
 ## Future Enhancements
 
-- Document grouping functionality
-- Advanced search capabilities
+- Enhanced AI integration for document analysis
+- Real-time collaboration features
 - Integration with external legal databases
-- Enhanced collaborative editing features
-- AI-powered document analysis and recommendations
+- Advanced visualization of document relationships
+- Mobile application support
+- OAuth-based authentication and authorization
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
